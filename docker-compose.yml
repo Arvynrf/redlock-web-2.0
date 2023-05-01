@@ -1,0 +1,49 @@
+version: '3.8'
+
+#container yang berisi halaman web utama
+services:
+   php:
+    build: 
+      context: ./redlock
+      dockerfile: Dockerfile   
+    depends_on:
+      - database
+    volumes:
+      - ./redlock:/var/www/html
+    ports:
+      - "7077:80"
+
+# container yang berfungsi menampung database
+   database:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password 
+    environment:
+      MYSQL_ROOT_PASSWORD: change_me
+      MYSQL_DATABASE: redlock_database
+      MYSQL_USER: user
+      MYSQL_PASSWORD: change_me
+    ports:
+      - "9906:3306"
+
+#container phpmyadmin untuk menyambungkan database
+   phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+        - '8080:80'
+    environment:
+        PMA_HOST: database
+    depends_on:
+        - database
+#    # web:
+#    #    build:
+#    #       context: ./Webserver
+#    #       dockerfile: Dockerfile
+#    #    ports:
+#    #       - 7001:80  
+   jenkins:
+      build:
+         context: ./Jenkins
+         dockerfile: Dockerfile
+      ports:
+         - 8001:8080
+

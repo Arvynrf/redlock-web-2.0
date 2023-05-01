@@ -1,0 +1,23 @@
+diff --git a/index.php b/newindex.php
+index 49b147a..e4de2fd 100644
+--- a/index.php
++++ b/newindex.php
+@@ -23,6 +23,18 @@ foreach ($users as $user) {
+     echo "<br>";
+ }
+ 
++echo "<br>";
++
++$sql = "SELECT COUNT(*) AS jumlah_user FROM users";
++$result = $conn->query($sql);
++
++if ($result->num_rows > 0) {
++    $row = $result->fetch_assoc();
++    echo "Jumlah User : " . $row["jumlah_user"];
++} 
++else {
++    echo "Jumlah User : 0";
++}
+ ?>
+ 
+ 
