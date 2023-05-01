@@ -23,6 +23,19 @@ foreach ($users as $user) {
     echo "<br>";
 }
 
+echo "<br>";
+
+$sql = "SELECT COUNT(*) AS jumlah_user FROM users";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    echo "Jumlah User : " . $row["jumlah_user"];
+} 
+else {
+    echo "Jumlah User : 0";
+}
+
 ?>
 
 
