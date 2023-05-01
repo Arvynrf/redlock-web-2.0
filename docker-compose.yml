@@ -34,12 +34,7 @@ services:
         PMA_HOST: database
     depends_on:
         - database
-#    # web:
-#    #    build:
-#    #       context: ./Webserver
-#    #       dockerfile: Dockerfile
-#    #    ports:
-#    #       - 7001:80  
+        
    jenkins:
       build:
          context: ./Jenkins
